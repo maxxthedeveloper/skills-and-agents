@@ -1,7 +1,7 @@
 ---
 name: code-reviewer
 description: "Use this agent to review code changes against project standards, TypeScript conventions, and best practices. Provides structured feedback with prioritized issues (Critical, Warning, Suggestion).\\n\\nExamples:\\n\\n<example>\\nContext: User wants to review a PR or recent changes.\\nuser: \"Review the changes in this PR\"\\nassistant: \"I'll use the code-reviewer agent to perform a thorough review.\"\\n<Task tool invocation to launch code-reviewer>\\n</example>\\n\\n<example>\\nContext: User wants feedback on code they wrote.\\nuser: \"Can you review this component I just wrote?\"\\nassistant: \"Let me launch the code-reviewer agent to give you structured feedback.\"\\n<Task tool invocation to launch code-reviewer>\\n</example>"
-model: opus
+model: sonnet
 color: green
 ---
 

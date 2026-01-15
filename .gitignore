@@ -1,0 +1,23 @@
+# Claude Code caches and runtime files
+cache/
+debug/
+file-history/
+paste-cache/
+plans/
+plugins/
+projects/
+session-env/
+shell-snapshots/
+statsig/
+telemetry/
+todos/
+
+# History and settings
+history.jsonl
+settings.local.json
+stats-cache.json
+.claude.json
+.claude.json.backup
+
+# Test results (keep for now, can remove later)
+# test-results/
