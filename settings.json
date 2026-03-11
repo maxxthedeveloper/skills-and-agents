@@ -1,42 +1,76 @@
 {
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "true"
+  },
   "permissions": {
     "allow": [
-      "Bash(ls:*)",
-      "Bash(find:*)",
-      "Bash(cat:*)",
-      "Bash(head:*)",
-      "Bash(tail:*)",
-      "Bash(tree:*)",
-      "Bash(wc:*)",
-      "Bash(file:*)",
-      "Bash(pwd)",
-      "Bash(open:*)",
-      "Bash(grep:*)",
-      "Bash(rg:*)",
-      "Bash(mkdir:*)",
-      "Bash(git status:*)",
-      "Bash(git diff:*)",
-      "Bash(git log:*)",
-      "Bash(git show:*)",
-      "Bash(git branch:*)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(git push:*)",
-      "Bash(git restore:*)",
-      "Bash(npx tsc:*)",
-      "Bash(npx convex typecheck)",
-      "Bash(npx convex typecheck:*)",
-      "Bash(npx convex dev:*)",
-      "Bash(npx convex deploy:*)",
-      "Bash(npm view:*)",
-      "Bash(npm install:*)",
-      "Bash(npm run:*)",
-      "Bash(npm test:*)",
-      "Bash(rustup target list:*)",
-      "Bash(rustup target add:*)",
-      "Bash(cargo check:*)",
+      "Bash(*)",
       "WebSearch",
-      "WebFetch(domain:*)"
+      "WebFetch(domain:*)",
+      "mcp__plugin_context7_context7__resolve-library-id",
+      "mcp__plugin_context7_context7__query-docs",
+      "mcp__plugin_figma_figma__get_screenshot",
+      "mcp__plugin_figma_figma__get_design_context",
+      "mcp__plugin_figma_figma__get_metadata",
+      "mcp__plugin_figma_figma__get_variable_defs",
+      "mcp__plugin_figma_figma__get_code_connect_map",
+      "mcp__plugin_figma_figma__get_code_connect_suggestions",
+      "mcp__plugin_figma_figma__whoami",
+      "mcp__plugin_figma_figma__get_figjam",
+      "mcp__plugin_figma_figma__create_design_system_rules",
+      "mcp__claude-in-chrome__read_page",
+      "mcp__claude-in-chrome__find",
+      "mcp__claude-in-chrome__get_page_text",
+      "mcp__claude-in-chrome__tabs_context_mcp",
+      "mcp__claude-in-chrome__tabs_create_mcp",
+      "mcp__claude-in-chrome__read_console_messages",
+      "mcp__claude-in-chrome__read_network_requests",
+      "mcp__claude-in-chrome__shortcuts_list",
+      "mcp__claude-in-chrome__shortcuts_execute",
+      "mcp__claude-in-chrome__computer",
+      "mcp__claude-in-chrome__navigate",
+      "mcp__claude-in-chrome__form_input",
+      "mcp__claude-in-chrome__javascript_tool",
+      "mcp__claude-in-chrome__gif_creator",
+      "mcp__claude-in-chrome__upload_image",
+      "mcp__claude-in-chrome__resize_window",
+      "mcp__claude-in-chrome__update_plan",
+      "mcp__whoop__whoop_get_overview",
+      "mcp__whoop__whoop_get_sleep",
+      "mcp__whoop__whoop_get_recovery",
+      "mcp__whoop__whoop_get_strain",
+      "mcp__whoop__whoop_get_healthspan"
+    ],
+    "deny": [
+      "Bash(sudo rm:*)",
+      "Bash(sudo chmod:*)",
+      "Bash(sudo chown:*)",
+      "Bash(sudo mkfs:*)",
+      "Bash(sudo dd:*)",
+      "Bash(sudo shutdown:*)",
+      "Bash(sudo reboot:*)",
+      "Bash(sudo launchctl:*)",
+      "Bash(sudo systemctl:*)",
+      "Bash(sudo dscl:*)",
+      "Bash(sudo sysadminctl:*)",
+      "Bash(rm -rf /:*)",
+      "Bash(rm -rf ~:*)",
+      "Bash(rm -rf /*:*)",
+      "Bash(rm -rf $HOME:*)",
+      "Bash(mkfs:*)",
+      "Bash(dd if=:*)",
+      "Bash(shutdown:*)",
+      "Bash(reboot:*)",
+      "Bash(diskutil eraseDisk:*)",
+      "Bash(diskutil partitionDisk:*)",
+      "Bash(> /dev/sd:*)",
+      "Bash(> /dev/disk:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git push origin +*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean -fd:*)",
+      "Bash(git clean -fx:*)"
     ],
     "defaultMode": "acceptEdits"
   },
@@ -51,23 +85,16 @@
         ]
       }
     ],
-    "PreToolUse": [
-      {
-        "matcher": "Edit|Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/maxx/.claude/hooks/branch-protection.sh"
-          }
-        ]
-      }
-    ]
+    "PreToolUse": []
   },
   "enabledPlugins": {
     "rust-analyzer-lsp@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
     "context7@claude-plugins-official": true,
-    "vercel@claude-plugins-official": true
-  }
+    "vercel@claude-plugins-official": true,
+    "figma@claude-plugins-official": true
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "effortLevel": "high"
 }
