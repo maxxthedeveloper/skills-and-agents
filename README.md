@@ -18,7 +18,6 @@ Custom subagents spawned via the `Task` tool. Each runs in its own context with 
 
 | Agent | Purpose |
 |---|---|
-| `design-engineer` | Implement and refine UI components with pixel-perfect detail |
 | `design-lead` | Orchestrate parallel design reviews with 5-6 specialist auditors |
 | `design-auditor` | Comprehensive design audit (hierarchy, density, patterns, accessibility) |
 | `info-arch-auditor` | Information architecture, visual hierarchy, 3-second test |
@@ -28,10 +27,7 @@ Custom subagents spawned via the `Task` tool. Each runs in its own context with 
 | `systems-auditor` | Design system tokens, spacing scales, component patterns |
 | `react-auditor` | React/Next.js resilience patterns and performance |
 | `mobile-ux-auditor` | Mobile UX audit (cognitive load, spacing, consistency) |
-| `ux-copywriter` | Write UX microcopy (buttons, errors, empty states, tooltips) |
 | `feature-research` | Research libraries, frameworks, and technical approaches |
-| `code-reviewer` | Structured code review with prioritized issues |
-| `system-prompt-engineer` | Debug and iterate on AI system prompts |
 
 ### Design review team
 
@@ -53,37 +49,39 @@ Each auditor reports findings independently. The design-lead deduplicates, resol
 
 Inline knowledge and workflows that run in the main conversation context.
 
-| Skill | Location | Purpose |
-|---|---|---|
-| `copywriting` | `skills/copywriter/` | Marketing page copy — headlines, CTAs, page structure frameworks |
-| `tech-storytelling` | Root `SKILL.md` | Video script workflow for product announcements |
+### `skills/framer/` — Framer voice and copy
+
+| Skill | Purpose |
+|---|---|
+| `framer-ux-writer` | Write and audit in-product UX copy for Framer Studio (toasts, buttons, empty states, dialogs) |
+| `framer-email-writer` | Write the emails Framer sends via Loops (releases, onboarding, changelog, lifecycle) |
+
+### `skills/personal/` — general-purpose
+
+| Skill | Purpose |
+|---|---|
+| `design-engineer` | Production-grade frontend interfaces with 18 interface polish principles |
+| `web-typography` | Audit, generate, and systematize web typography |
+| `humanize-ai-content` | Turn AI-generated content into natural, human-sounding writing |
 
 ## Installation
 
 ### Agents
 
-Copy individual agent files to your Claude Code agents directory:
-
 ```bash
 # Global (all projects)
-cp agents/design-engineer.md ~/.claude/agents/
+cp agents/design-lead.md ~/.claude/agents/
 
 # Project-specific
-cp agents/code-reviewer.md .claude/agents/
+cp agents/design-auditor.md .claude/agents/
 ```
 
 ### Skills
 
-Copy skill directories to your Claude Code skills directory:
-
 ```bash
 # Global
-cp -r skills/copywriter ~/.claude/skills/
+cp -R skills/framer/framer-ux-writer ~/.claude/skills/
 
 # Project-specific
-cp -r skills/copywriter .claude/skills/
+cp -R skills/personal/web-typography .claude/skills/
 ```
-
-## License
-
-MIT

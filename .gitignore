@@ -18,6 +18,3 @@ settings.local.json
 stats-cache.json
 .claude.json
 .claude.json.backup
-
-# Test results (keep for now, can remove later)
-# test-results/
