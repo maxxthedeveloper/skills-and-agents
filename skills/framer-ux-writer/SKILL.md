@@ -62,14 +62,15 @@ These are always in force, in both modes. Violating one is a defect.
    - Bad: `“Only editors in this workspace can\nopen this page.”`
    - Good: `“Only editors in this workspace\ncan open this page.”`
 
-3. **Casing split: names get Title Case, statements get sentence case.** A string that *names* something is Title Case; a string that *says* something is sentence case (Apple’s macOS logic, and verified against the vekter codebase).
-   - **Title Case:** page (h1) titles (`“Account Settings”`), section headings (`“Danger Zone”`, `“Passkeys”`), buttons (`“View Invoices”`, `“Add Passkey”`, `“Try Again”`), **field and control labels** (`“First Name”`, `“Aspect Ratio”`, `“Workspace Invites”`), menu items (`“Set Variant”`, `“New Page”`), tab labels, table column headers. Small words (to, and, of, a, the) stay lowercase: `“Upgrade to Pro”`, `“Back to Plans”`.
-   - **Sentence case:** anything phrased as a statement or question — toasts (`“Payment already in progress”`), dialog bodies, helper/description text, tooltips that explain, empty states (`“No projects”`), placeholders (`“Enter a path…”`, `“My workspace”`), and labels that are full sentences or questions (`“Who can join this workspace?”`, `“Automatically hide toolbar”`).
-   - The test: could it be the *name* of the thing? Title Case. Is it *telling you* something? Sentence case. Flag violations in either direction in audits.
+3. **Casing split: names and fragment titles get Title Case, sentences get sentence case.** A string that *names* something — or *titles* a screen, card, or alert with a fragment — is Title Case; a string phrased as a full sentence or question is sentence case. This is Apple’s actual HIG rule (Alerts: “If the title is a sentence fragment, use title-style capitalization”; complete-sentence titles stay sentence-style with punctuation).
+   - **Title Case:** page (h1) titles (`“Account Settings”`), section headings (`“Danger Zone”`, `“Passkeys”`), buttons (`“View Invoices”`, `“Add Passkey”`, `“Try Again”`), **error/success/empty-state titles — they are fragments** (`“Payment Declined”`, `“Editor Limit Reached”`, `“No Access”`, `“No Projects”`), **field and control labels** (`“First Name”`, `“Aspect Ratio”`, `“Workspace Invites”`), menu items (`“Set Variant”`, `“New Page”`), tab labels, table column headers. Small words (to, and, of, a, an, the, in, for, or) stay lowercase unless first/last: `“Upgrade to Pro”`, `“Payment in Progress”`, `“Add-On Not Available”`.
+   - **Sentence case:** anything phrased as a complete sentence or question — dialog bodies, helper/description text, tooltips that explain, placeholders (`“Enter a path…”`, `“My workspace”`), option/checkbox labels (`“Automatically hide toolbar”`), and titles that are genuine questions (`“Who can join this workspace?”`).
+   - **Prefer fragment titles.** Don’t write a sentence as a title, and never mechanically re-case one — rewrite it into a short fragment: `“You don’t have access”` → `“No Access”`, `“Payment already in progress”` → `“Payment in Progress”`, `“Still activating your plan”` → `“Activation in Progress”`.
+   - The test: is it a name or a title fragment? Title Case. Is it a full sentence or question *telling you* something? Sentence case. Flag violations in either direction in audits.
 
 4. **Blameless and constructive.** Never put fault on the user. State the fact, then the path out — and frame the fix as a positive instruction (what *to* do), not what went wrong.
-   - Not `“You exceeded the editor limit”` → `“Editor limit reached”`.
-   - Not `“Invalid code”` → `“Promotion code didn’t work”`.
+   - Not `“You exceeded the editor limit”` → `“Editor Limit Reached”`.
+   - Not `“Invalid code”` → `“Promotion Code Not Applied”`.
    - Not `“That password is too short”` → `“Choose a password with at least 8 characters”`.
 
 5. **Action-verb buttons.** Start with the verb, name the object when it isn’t obvious: `“Subscribe”`, `“Upgrade to Pro”`, `“Cancel Plan”`, `“Try Again”`. Never `“OK”`, `“Submit”`, `“Yes”`. No `-ing` forms (`“Cancel”`, not `“Cancelling”`). A button must make sense read on its own, without the title — and in a pair, never let one label mean two things (a “Cancel download?” dialog gets `“Keep downloading”` / `“Stop”`, not `“Cancel”` / `“OK”`).
@@ -86,14 +87,16 @@ These are always in force, in both modes. Violating one is a defect.
 
 ## The two-line toast pattern
 
-Framer’s toasts and error/success cards are usually two lines: **primary** (what happened) + **secondary** (the detail or the next step). Both lines balanced (rule 2). Examples from the product:
+Framer’s toasts and error/success cards are usually two lines: **primary** (what happened — a Title Case fragment, per rule 3) + **secondary** (the detail or the next step, sentence case). Both lines balanced (rule 2). Examples from the product:
 
-- `“Exceeded max file size”` / `“of 5 MB.”`
-- `“Couldn’t load your summary”` / `“Check your connection and try again, or contact support.”`
-- `“Payment already in progress”` / `“Complete it in your other tab, or close it to start over.”`
-- `“Editor limit reached”` / `“Your workspace has 8 editors, more than this plan allows.”`
+- `“Couldn’t Load Prices”` / `“Check your connection and try again, or contact support.”`
+- `“Payment in Progress”` / `“Complete it in your other tab, or close it and try again.”`
+- `“Editor Limit Reached”` / `“Your workspace has 8 editors, more than this plan allows.”`
+- `“Couldn’t Update Plan”` / `“Try again, or contact support if this keeps happening.”`
 
-Single-line is fine for simple successes: `“Archived My Portfolio.”`, `“Copied API key”`.
+Older toasts still carry sentence-case primaries (`“Exceeded max file size”`) — legacy, like straight quotes; new primaries are Title Case fragments.
+
+Single-line is fine for simple successes: `“Archived My Portfolio.”`, `“Copied API Key”`.
 
 ## References — load when relevant
 
@@ -106,4 +109,4 @@ Single-line is fine for simple successes: `“Archived My Portfolio.”`, `“Co
 
 ## Before you deliver
 
-Self-check against the non-negotiables. Re-read your own copy as if it were the codebase you’re about to fail in review: curly quotes? balanced lines? casing split (Title Case for names — titles, buttons, labels, menu items; sentence case for statements)? blameless? verb-first buttons? If any answer is no, fix it before showing the user.
+Self-check against the non-negotiables. Re-read your own copy as if it were the codebase you’re about to fail in review: curly quotes? balanced lines? casing split (Title Case for names and fragment titles — headings, buttons, labels, error/success titles; sentence case for full sentences and questions)? titles written as fragments, not re-cased sentences? blameless? verb-first buttons? If any answer is no, fix it before showing the user.

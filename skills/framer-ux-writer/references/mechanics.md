@@ -64,9 +64,14 @@ This applies to two-line toasts (primary/secondary are each one line, but a wrap
 
 ## Capitalization
 
-Two casing systems, split by one rule — **names get Title Case, statements get sentence case.** This is Apple’s macOS logic (HIG, “Capitalization of Interface Element Labels and Text”) and it matches the vekter codebase (`label="First Name"`, `title="Aspect Ratio"`, menu `label: "Set Variant"`, `<T>Danger Zone</T>`).
+Two casing systems, split by one rule — **names and fragment titles get Title Case, full sentences get sentence case.** This is Apple’s HIG logic, verified against two sources:
 
-### Title Case — anything that names something
+- HIG Alerts: *“If the title is a complete sentence, use sentence-style capitalization and appropriate ending punctuation. If the title is a sentence fragment, use title-style capitalization, and don’t add ending punctuation.”* Hence Apple’s `“Cannot Connect to App Store”` but `“Do you want to save the changes?”`.
+- macOS HIG “Capitalization of Interface Element Labels and Text” (Table 10-2): title style for menus, buttons, and labels that aren’t full sentences (`“Total Connection Time”`); sentence style for dialog messages and option/checkbox text (`“Show displays in menu bar”`).
+
+It also matches the vekter codebase (`label="First Name"`, `title="Aspect Ratio"`, menu `label: "Set Variant"`, `<T>Danger Zone</T>`, `title="Payment Declined"`).
+
+### Title Case — anything that names or titles something
 
 | Surface | Verified codebase examples |
 |---------|---------------------------|
@@ -77,9 +82,10 @@ Two casing systems, split by one rule — **names get Title Case, statements get
 | Form-group label | “Workspace Invites”, “Move Projects”, “Default Role for New Workspace Members” |
 | Property-panel row | “Aspect Ratio”, “Offset Y”, “Time Zone” |
 | Menu item | “Set Variant”, “New Page”, “Select All”, “View Analytics” |
+| Error / success / empty-state title (fragment) | “Payment Declined”, “Editor Limit Reached”, “No Access”, “Add-On Not Available”, “Updated to Pro” |
 | Tab label, table column header | “Pending Invites” |
 
-Title Case rules: capitalize principal words; short prepositions, articles, and conjunctions (to, and, of, a, an, the, for, or) stay lowercase — `“Upgrade to Pro”`, `“Back to Plans”`, `“Switch to Yearly”`, never `“Upgrade To Pro”`.
+Title Case rules: capitalize principal words; short prepositions, articles, and conjunctions (to, and, of, a, an, the, for, or, in) stay lowercase — `“Upgrade to Pro”`, `“Back to Plans”`, `“Payment in Progress”`, never `“Upgrade To Pro”`. Always capitalize the first and last word, even a small one (`“Activation in Progress”`).
 
 | Title Case (do) | (don’t) |
 |-----------------|---------|
@@ -87,29 +93,34 @@ Title Case rules: capitalize principal words; short prepositions, articles, and 
 | “First Name” (field label) | “First name” |
 | “Update Payment Method” | “Update payment method” |
 | “Danger Zone” (section heading) | “Danger zone” |
+| “Payment Declined” (error title) | “Payment declined” |
+| “No Access” (rewritten fragment) | “You Don’t Have Access” (re-cased sentence) |
 
-### Sentence case — anything that says something
+### Sentence case — full sentences, questions, and options
 
 | Surface | Examples |
 |---------|----------|
-| Toast / message | “Payment already in progress” |
 | Dialog body, helper/description text | “Deleting a project will delete it for all collaborators…” |
+| Error/toast secondary line | “Your workspace has 8 editors, more than this plan allows.” |
 | Explanatory tooltip | “Additional editors are $20 / month.” |
-| Empty state | “No projects” / “Create a project from scratch…” |
+| Empty-state body | “Create a project from scratch or use a template to get started.” |
 | Placeholder | “Enter a path…”, “My workspace”, “First name” (as example input) |
-| Label that is a question or full sentence | “Who can join this workspace?” |
+| Option/checkbox label | “Automatically hide toolbar” |
+| Title that is a genuine question | “Who can join this workspace?” |
 
 Note product names keep their caps inside a sentence-case string: `“Connect to the CMS”`, `“You are currently on a Free plan.”`
 
-**The tiebreak test:** could the string be the *name* of the field, command, or place? Title Case. Is it *telling the user* something — describing, asking, reporting? Sentence case. A placeholder saying “First name” is sentence case (it’s example input), while the label above it is “First Name” (it names the field). In audits, flag violations in either direction; treat old sentence-case labels as legacy, like straight quotes.
+**Titles are fragments, not sentences.** When a title wants to be a sentence, rewrite it into a short fragment instead of re-casing it: `“You don’t have access”` → `“No Access”`, `“Still activating your plan”` → `“Activation in Progress”`. Apple keeps complete-sentence titles sentence-case with punctuation — but house style is to avoid sentence titles altogether.
+
+**The tiebreak test:** is it a name, or a fragment titling a screen/card/error? Title Case. Is it a full sentence or question — describing, asking, reporting? Sentence case. A placeholder saying “First name” is sentence case (it’s example input), while the label above it is “First Name” (it names the field). In audits, flag violations in either direction; treat old sentence-case titles (`“Something went wrong”`-era screens) as legacy, like straight quotes.
 
 ---
 
 ## Periods
 
 - **Full sentences** get a period: `“Deleting a project will delete it for all collaborators and cannot be undone.”`
-- **Buttons, labels, headlines, short fragments** do not: `“Try Again”`, `“No projects”`, `“Copied API key”`.
-- **Two-line toasts:** the secondary line usually completes a sentence and takes a period: `“Exceeded max file size”` / `“of 5 MB.”` The primary fragment doesn’t.
+- **Buttons, labels, headlines, short fragments** do not: `“Try Again”`, `“No Projects”`, `“Payment Declined”`.
+- **Two-line toasts:** the secondary line usually completes a sentence and takes a period: `“Editor Limit Reached”` / `“Your workspace has 8 editors, more than this plan allows.”` The primary fragment doesn’t.
 
 ---
 
@@ -119,7 +130,7 @@ Note product names keep their caps inside a sentence-case string: `“Connect to
 - **Oxford comma:** always. `“Edit, delete, or archive.”`
 - **Ellipsis `…`:** signals “this needs more input” on an action (`“Save as…”`, opening a dialog) or an in-progress state (`“Exporting…”`). Don’t use it for trailing-off tone.
 - **Question marks:** fine in genuine questions (“Cancel download?”), but most dialog bodies are statements, not questions.
-- **Ampersand `&`:** acceptable in tight button labels where it reads naturally: `“Confirm & pay”`.
+- **Ampersand `&`:** acceptable in tight button labels where it reads naturally: `“Confirm & Pay”`.
 
 ---
 
@@ -127,7 +138,7 @@ Note product names keep their caps inside a sentence-case string: `“Connect to
 
 Aligned with Apple’s HIG (“Writing”): the interface is an instrument, not a speaker.
 
-- **Never “we” / “us” / “our” in system messages.** It’s unclear who “we” is, and it turns a fact into an apology. `“Unable to load content”` or `“Couldn’t load your summary”` — not `“We’re having trouble loading this content.”` This applies to all errors, toasts, tooltips, and settings copy.
+- **Never “we” / “us” / “our” in system messages.** It’s unclear who “we” is, and it turns a fact into an apology. `“Unable to load content”` or `“Couldn’t Load Summary”` — not `“We’re having trouble loading this content.”` This applies to all errors, toasts, tooltips, and settings copy.
 - **Possessives sparingly.** Drop “my/your” when context already establishes ownership: `“Favorites”`, not `“Your Favorites”`; `“Account”`, not `“My Account”`. Keep the possessive when it does real work — `“Your workspace has 8 editors”` distinguishes *this* workspace from the plan’s limit.
 - **Pick one perspective and hold it.** If a flow says “your site,” it doesn’t switch to “my site” elsewhere. Framer copy addresses the user as “you”; the product itself has no first person.
 - **The sanctioned exception:** a rare, sincere human moment — e.g. the high-stakes cancellation line `“Please don’t hesitate to contact us if we can do anything to keep Framer in your workflow.”` That’s a person talking, on purpose. Everything routine stays impersonal.

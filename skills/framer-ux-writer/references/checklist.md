@@ -8,7 +8,7 @@ A string passes only if every applicable line passes. Any fail is a defect to fi
 
 - [ ] **Curly quotes** — all apostrophes and quotes are `‘` `’` `“` `”`, never straight `'` or `"`. (Displayed text only; not code/translation keys.) Run `scripts/check-copy.sh` on drafted strings to catch these deterministically.
 - [ ] **Dashes** — em `—` / en `–` where used, never `--`. Ellipsis is `…`, not `...`.
-- [ ] **Casing split** — names get Title Case, statements get sentence case. Title Case: titles (page h1 + section headings), buttons, **field/control labels**, form-group labels, menu items, property rows, tabs, column headers (`“Account Settings”`, `“Danger Zone”`, `“First Name”`, `“Set Variant”`) with small words lowercase (`“Upgrade to Pro”`). Sentence case: toasts, dialog bodies, helper text, tooltips, empty states, placeholders, and any label that is a question or full sentence (`“Payment already in progress”`, `“Who can join this workspace?”`). Flag violations in either direction.
+- [ ] **Casing split** — names and fragment titles get Title Case, full sentences get sentence case. Title Case: titles (page h1 + section headings), **error/success/empty-state titles that are fragments** (`“Payment Declined”`, `“Editor Limit Reached”`, `“No Access”`), buttons, **field/control labels**, form-group labels, menu items, property rows, tabs, column headers (`“Account Settings”`, `“Danger Zone”`, `“First Name”`, `“Set Variant”`) with small words lowercase (`“Upgrade to Pro”`, `“Payment in Progress”`). Sentence case: dialog/toast bodies, helper text, tooltips, placeholders, option labels, and any string that is a question or full sentence (`“Who can join this workspace?”`). Titles should be fragments — rewrite sentence titles (`“You don’t have access”` → `“No Access”`), don’t re-case them. Flag violations in either direction.
 - [ ] **Periods** — present on full sentences, absent on buttons/labels/fragments.
 - [ ] **No exclamation marks** (unless a truly exceptional, sincere case — default is none).
 - [ ] **Oxford comma** in any list of three or more.
@@ -37,7 +37,7 @@ A string passes only if every applicable line passes. Any fail is a defect to fi
 - [ ] Destructive buttons name the destructive act (“Delete project,” not “Confirm”).
 
 **Error / failure toast**
-- [ ] Primary line = the fact, neutral. Secondary line = recovery or concrete detail.
+- [ ] Primary line = the fact, neutral, a Title Case fragment (`“Payment Declined”`). Secondary line = recovery or concrete detail, sentence case.
 - [ ] Answers the three questions: what happened, why it happened, what to do now. The “why” isn’t silently dropped.
 - [ ] Names the specific object when more than one referent is possible (“My Portfolio,” not “this project”).
 - [ ] Recovery is specific when the fix is known (“Update Payment Method”), not generic.
@@ -48,7 +48,7 @@ A string passes only if every applicable line passes. Any fail is a defect to fi
 - [ ] No exclamation mark; surfaces the next opportunity only if one genuinely exists.
 
 **Empty state**
-- [ ] Headline names the emptiness (no period). Body guides forward or explains what appears here.
+- [ ] Headline names the emptiness — Title Case fragment, no period (`“No Projects”`). Body guides forward or explains what appears here.
 - [ ] At most one CTA, verb-first.
 
 **Confirmation dialog (destructive)**

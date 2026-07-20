@@ -32,7 +32,7 @@ House style uses real em dashes ("Periods to end thoughts; em-dashes to join the
 
 - **Specific over generic** — the existing non-negotiable is also the strongest anti-AI signal: "(8/100)", "of 5 MB", "Expires June 30, 2026". A string with a real number in it cannot read as slop.
 - **Elegant variation is a tell** — call the thing by its name every time (the project, the plan, the domain). Never cycle synonyms ("your site" → "your creation" → "your masterpiece").
-- **Plain verdicts** — "Payment declined" is human because it commits. Impersonal hedges ("This may potentially affect…") are the AI register; if something is uncertain, say what is known: "This can take a few minutes."
+- **Plain verdicts** — "Payment Declined" is human because it commits. Impersonal hedges ("This may potentially affect…") are the AI register; if something is uncertain, say what is known: "This can take a few minutes."
 
 ## Judging (Audit mode)
 

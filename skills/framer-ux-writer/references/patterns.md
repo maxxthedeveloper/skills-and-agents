@@ -6,19 +6,20 @@ Per-surface playbooks. Each is a short rule plus DO / DON’T pairs grounded in 
 
 ## Error & failure toasts
 
-**Rule.** Name the fact neutrally, then give the recovery. Two lines: primary (what happened) + secondary (detail or next step). Blameless always. No error codes, no “Error:” prefix, no “Oops.”
+**Rule.** Name the fact neutrally, then give the recovery. Two lines: primary (what happened — a Title Case fragment) + secondary (detail or next step, sentence case). Blameless always. No error codes, no “Error:” prefix, no “Oops.”
 
 **Budget.** Primary 2–5 words, no period; secondary one sentence.
 
 | DO | DON’T |
 |----|-------|
-| “Couldn’t load prices” | “Error: failed to fetch pricing data” |
-| “Payment declined” / “Update your payment method and try again.” | “Your payment was rejected” |
-| “Editor limit reached” / “Your workspace has 8 editors, more than this plan allows.” | “You’ve exceeded the editor limit!” |
-| “Promotion code didn’t work” / “This code is invalid or expired.” | “Invalid promo code” |
-| “Couldn’t start your checkout” / “Try again, or contact support if this keeps happening.” | “Checkout initialization error” |
+| “Couldn’t Load Prices” | “Error: failed to fetch pricing data” |
+| “Payment Declined” / “Update your payment method and try again.” | “Your payment was rejected” |
+| “Editor Limit Reached” / “Your workspace has 8 editors, more than this plan allows.” | “You’ve exceeded the editor limit!” |
+| “Promotion Code Not Applied” / “This code is invalid or expired.” | “Invalid promo code” |
+| “Couldn’t Start Checkout” / “Try again, or contact support if this keeps happening.” | “Checkout initialization error” |
+| “No Access” / “Only editors in this workspace can open this page.” | “You Don’t Have Access” (sentence re-cased as a title) |
 
-**Limit / capacity errors.** State the limit + the live count: `“Page limit exceeded”` / `“(5/50).”`, `“Bandwidth limit exceeded”` / `“(105/100 GB).”`. The number does the explaining.
+**Limit / capacity errors.** State the limit + the live count: `“Page Limit Exceeded”` / `“(5/50).”`, `“Bandwidth Limit Exceeded”` / `“(105/100 GB).”`. The number does the explaining. (Shipped strings still carry sentence-case primaries — legacy.)
 
 **Notes.**
 - “Couldn’t” for things the system tried and failed at; “Can’t” for things that aren’t allowed right now.
@@ -36,28 +37,28 @@ Per-surface playbooks. Each is a short rule plus DO / DON’T pairs grounded in 
 | DO | DON’T |
 |----|-------|
 | “Archived My Portfolio.” | “Successfully archived your project!” |
-| “Updated to Pro” / “Your site subscription has been updated to a Pro plan.” | “Awesome! You’re now on Pro 🎉” |
-| “Copied API key” | “API key copied to clipboard!” |
-| “The invoice has been sent to your inbox.” | “Check your email for the invoice!” |
+| “Updated to Pro” / “Your new plan is active. The invoice is in your inbox.” | “Awesome! You’re now on Pro 🎉” |
+| “Copied API Key” | “API key copied to clipboard!” |
+| “The invoice is in your inbox.” | “Check your email for the invoice!” |
 
 **Notes.**
 - Project actions: past-tense verb + object — “Archived,” “Deleted,” “Unarchived,” “Left,” “Removed from [Workspace].”
-- A genuine “Thank you.” is in-voice for moments like a completed upgrade. One period, no more.
+- A genuine “Thank you.” is in-voice for moments like a completed upgrade. One period, no more. (A complete-sentence title like this keeps sentence case + punctuation — the sanctioned exception to fragment titles.)
 - Surface the next opportunity when there is one: “You are now eligible to claim a free domain.” with an “Add Domain” action.
 
 ---
 
 ## Empty states
 
-**Rule.** Headline names the emptiness (sentence case, no period). One line of body either guides the user to the first action or explains what will appear here. Optional single CTA, verb-first.
+**Rule.** Headline names the emptiness (Title Case fragment, no period). One line of body either guides the user to the first action or explains what will appear here. Optional single CTA, verb-first.
 
 **Budget.** Headline 2–4 words; body one sentence.
 
 | DO | DON’T |
 |----|-------|
-| “No projects” / “Create a project from scratch or use a template to get started.” | “Nothing here yet!” |
-| “No archived projects” / “All archived projects will be listed here.” | “You have no archived projects at this time.” |
-| “This project does not contain any code components.” / “Browse all code components and code overrides here.” | “No data” |
+| “No Projects” / “Create a project from scratch or use a template to get started.” | “Nothing here yet!” |
+| “No Archived Projects” / “All archived projects will be listed here.” | “You have no archived projects at this time.” |
+| “No Code Components” / “Browse all code components and code overrides here.” | “No data” |
 
 **Three flavors:**
 - *First-run / actionable* — guide forward with a CTA (“Create a project…”).
@@ -146,10 +147,10 @@ Per-surface playbooks. Each is a short rule plus DO / DON’T pairs grounded in 
 | DO | DON’T |
 |----|-------|
 | “You are currently on a Free plan.” | “You haven’t upgraded yet” |
-| “Couldn’t load your summary” / “Check your connection and try again, or contact support.” | “Failed to create your order” |
-| “Payment already in progress” / “Complete it in your other tab, or close it to start over.” | “A checkout’s already open” |
-| “Cancel your add-on to downgrade” / “The Analytics add-on isn’t available on this plan.” | “You can’t downgrade with this add-on” |
-| Informational dead-end (no fake CTA): “Plans live in workspaces” | A disabled button that goes nowhere |
+| “Couldn’t Load Summary” / “Check your connection and try again, or contact support.” | “Failed to create your order” |
+| “Payment in Progress” / “Complete it in your other tab, or close it and try again.” | “A checkout’s already open” |
+| “Add-On Not Available” / “The Analytics add-on isn’t available on this plan.” | “You can’t downgrade with this add-on” |
+| Informational dead-end (no fake CTA): “No Plans for Draft Projects” | A disabled button that goes nowhere |
 
 **Notes.**
 - When an action is impossible, explain the *why* in terms of the user’s setup (“more than this plan allows,” “isn’t available on this plan”), not a refusal.

@@ -15,7 +15,7 @@ A portrait of how Framer writes, plus a bank of real strings to pattern-match ag
 
 - Short. Headlines are 3–7 words, often fragments. Bodies rarely top ~20 words.
 - Parallel structure for lists: “Design freely, manage CMS content, optimize SEO, collaborate, and publish fast.”
-- Periods to end thoughts; em-dashes to join them. Two casing systems: names get Title Case (titles, buttons, field labels, menu items), statements get sentence case (toasts, bodies, placeholders, helper text) — see mechanics.md.
+- Periods to end thoughts; em-dashes to join them. Two casing systems: names and fragment titles get Title Case (titles, buttons, field labels, menu items, error/toast primaries like “Payment Declined”), full sentences get sentence case (bodies, placeholders, helper text) — see mechanics.md.
 
 ## House words (reach for these)
 
@@ -40,7 +40,7 @@ For calibration only. **Do not** write in-product copy this punchy; product copy
 - “Make the web more creative” — the mission; ambitious, domain-specific.
 - “Built on a community that isn’t going anywhere” — reassurance, human, no superlative.
 
-What makes these “Framer”: they assume a sophisticated reader, lead with the verb or the outcome, follow the casing split (Title Case for names, sentence case for statements), and never raise their voice.
+What makes these “Framer”: they assume a sophisticated reader, lead with the verb or the outcome, follow the casing split (Title Case for names and fragment titles, sentence case for full sentences), and never raise their voice.
 
 ---
 
@@ -49,46 +49,45 @@ What makes these “Framer”: they assume a sophisticated reader, lead with the
 These are the closest reference for what you write. Grouped by surface. All are good examples of the house style.
 
 ### Error / failure toasts
-- “Couldn’t load prices”
-- “Couldn’t load your summary” / “Check your connection and try again, or contact support.”
-- “Couldn’t start your checkout”
-- “Couldn’t reactivate your plan”
-- “Couldn’t update your plan”
-- “Payment declined”
-- “Payment already in progress” / “Complete it in your other tab, or close it to start over.”
-- “You don’t have access” / “Only editors in this workspace can open this page.”
-- “Editor limit reached” / “Your workspace has 8 editors, more than this plan allows.”
-- “Promotion code didn’t work” / “This code is invalid or expired.”
-- “Exceeded max file size” / “of 5 MB.”
-- “Page limit exceeded” / “(5/50).”
-- “CMS items limit exceeded” / “(500/1000).”
-- “Bandwidth limit exceeded” / “(105/100 GB).”
-- “Failed to load” / “code editor.”
-- “Try again, or contact support if this keeps happening.”
+- “Couldn’t Load Prices”
+- “Couldn’t Load Summary” / “Check your connection and try again, or contact support.”
+- “Couldn’t Start Checkout”
+- “Couldn’t Reactivate Plan”
+- “Couldn’t Update Plan”
+- “Payment Declined”
+- “Payment in Progress” / “Complete it in your other tab, or close it and try again.”
+- “No Access” / “Only editors in this workspace can open this page.”
+- “Editor Limit Reached” / “Your workspace has 8 editors, more than this plan allows.”
+- “Promotion Code Not Applied” / “This code is invalid or expired.”
+- “Add-On Not Available” / “The Analytics add-on isn’t available on this plan.”
+- “Activation in Progress” / “This is taking longer than usual. Try again in a moment.”
+- “Try again, or contact support if this keeps happening.” (secondary line)
 
-Pattern: name the fact neutrally (“Payment declined,” “Editor limit reached”), then give the recovery or the number. Never “you failed,” never an error code.
+Older shipped strings still carry sentence-case primaries — “Exceeded max file size” / “of 5 MB.”, “Page limit exceeded” / “(5/50).”, “Failed to load” / “code editor.” — treat as legacy, like straight quotes.
+
+Pattern: name the fact neutrally as a Title Case fragment (“Payment Declined,” “Editor Limit Reached”), then give the recovery or the number in sentence case. Never “you failed,” never an error code.
 
 ### Success / confirmation toasts
 - “Thank you.”
-- “Updated to Pro” / “Your site subscription has been updated to a Pro plan.”
-- “The invoice has been sent to your inbox.”
+- “Updated to Pro” / “Your new plan is active. The invoice is in your inbox.”
+- “The invoice is in your inbox.”
 - “You are now eligible to claim a free domain.”
 - “Archived My Portfolio.”
 - “Deleted My Portfolio.”
 - “Unarchived My Portfolio.”
-- “Copied API key”
-- “Purchased add-on”
+- “Copied API Key”
+- “Purchased Add-On”
 
-Pattern: state the result plainly. Past-tense verb + object for project actions. No exclamation marks; the moment carries itself.
+Pattern: state the result plainly. Past-tense verb + object for project actions; fragment primaries are Title Case (shipped `“Copied API key”`-style strings are legacy). No exclamation marks; the moment carries itself.
 
 ### Empty states
-- “No projects” / “Create a project from scratch or use a template to get started.”
-- “No archived projects” / “All archived projects will be listed here.”
-- “No templates” / “Create a new template or mark existing projects as templates to use them as starting points for your team.”
-- “No projects found” / “Try adjusting your search or browse workspaces.”
-- “This project does not contain any code components.” / “Browse all code components and code overrides here.”
+- “No Projects” / “Create a project from scratch or use a template to get started.”
+- “No Archived Projects” / “All archived projects will be listed here.”
+- “No Templates” / “Create a new template or mark existing projects as templates to use them as starting points for your team.”
+- “No Projects Found” / “Try adjusting your search or browse workspaces.”
+- “This project does not contain any code components.” / “Browse all code components and code overrides here.” (legacy full-sentence headline — new headlines are fragments: “No Code Components”)
 
-Pattern: short headline naming the emptiness, then one line that either guides the user forward or explains what will appear here.
+Pattern: short headline naming the emptiness as a Title Case fragment, then one line that either guides the user forward or explains what will appear here.
 
 ### Buttons & actions
 - “Subscribe” · “Upgrade to Pro” · “Downgrade to Pro” · “Switch to Yearly” · “Reactivate”
@@ -119,8 +118,10 @@ Pattern: say exactly what happens, in future tense, including the irreversible p
 - “Workspace used over 80%” / “of its credits.”
 - “Your plan expires soon.” / “Upgrade now.”
 
+These primaries stay sentence case: each pair is one sentence split across two lines for balance, not a title over a body.
+
 ---
 
 ## Quick calibration test
 
-Before delivering, ask: *Could this line drop into Bank B unnoticed?* If it’s louder, longer, blamier, or more title-cased than those strings, bring it back in line.
+Before delivering, ask: *Could this line drop into Bank B unnoticed?* If it’s louder, longer, or blamier than those strings — or cases a title as a sentence — bring it back in line.
