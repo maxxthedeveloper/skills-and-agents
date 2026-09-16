@@ -48,7 +48,18 @@ if [ -n "$EMOJI" ]; then
   echo
 fi
 
+# Title Case heuristic — warn only, never fails. House style is sentence case everywhere
+# (see mechanics.md — capitalization). Two consecutive Capitalized words mid-string is the
+# usual signature; proper nouns and product names ("Upgrade to Pro", "My Portfolio") are
+# fine, so review each hit rather than blindly re-casing. All-caps acronyms are ignored.
+TITLECASE=$(printf '%s\n' "$DRAFT" | perl -CSD -ne 'print "$.:$_" if /\b\p{Lu}\p{Ll}+(?:-\p{Lu}\p{Ll}+)? \p{Lu}\p{Ll}+\b/' || true)
+if [ -n "$TITLECASE" ]; then
+  echo "WARN: possible Title Case (house style is sentence case; proper nouns are fine)"
+  echo "$TITLECASE" | sed 's/^/  /'
+  echo
+fi
+
 if [ "$FAIL" -eq 0 ]; then
-  echo "PASS: mechanics clean (balance, casing, and voice items still manual)"
+  echo "PASS: mechanics clean (balance and voice items still manual; review any WARN above)"
 fi
 exit $FAIL

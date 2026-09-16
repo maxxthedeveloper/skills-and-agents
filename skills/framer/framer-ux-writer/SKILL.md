@@ -42,7 +42,7 @@ Give the subagent this brief:
 >
 > Return a compact digest, nothing else: 5–10 reference strings, each as `App — “verbatim copy”` with a one-clause note on why it works (structure, verb choice, how it frames the fix), and the screen’s `mobbin_url` as a markdown link. Group by primary line / secondary line / buttons if useful. No preamble, no restating the task.
 
-When it returns: mine the references for *patterns* — how they structure the two-line toast, which verb they put on the button, how they frame a blocked moment blamelessly. Then write in **Framer’s** voice and enforce every non-negotiable. If the references clash with Framer’s rules (Title-case everything, marketing hype, straight quotes), Framer wins. Cite a couple of the strongest references to the user alongside your draft so they see the calibration.
+When it returns: mine the references for *patterns* — how they structure the two-line toast, which verb they put on the button, how they frame a blocked moment blamelessly. Then write in **Framer’s** voice and enforce every non-negotiable. If the references clash with Framer’s rules (Title Case buttons and headings, marketing hype, straight quotes), Framer wins. Cite a couple of the strongest references to the user alongside your draft so they see the calibration.
 
 If Mobbin returns nothing useful or the MCP is unavailable, say so in one line and proceed from `references/framer-voice.md` — don’t block the copy on it.
 
@@ -62,24 +62,22 @@ These are always in force, in both modes. Violating one is a defect.
    - Bad: `“Only editors in this workspace can\nopen this page.”`
    - Good: `“Only editors in this workspace\ncan open this page.”`
 
-3. **Casing split: names and fragment titles get Title Case, sentences get sentence case.** A string that *names* something — or *titles* a screen, card, or alert with a fragment — is Title Case; a string phrased as a full sentence or question is sentence case. This is Apple’s actual HIG rule (Alerts: “If the title is a sentence fragment, use title-style capitalization”; complete-sentence titles stay sentence-style with punctuation).
-   - **Title Case:** page (h1) titles (`“Account Settings”`), section headings (`“Danger Zone”`, `“Passkeys”`), buttons (`“View Invoices”`, `“Add Passkey”`, `“Try Again”`), **error/success/empty-state titles — they are fragments** (`“Payment Declined”`, `“Editor Limit Reached”`, `“No Access”`, `“No Projects”`), **field and control labels** (`“First Name”`, `“Aspect Ratio”`, `“Workspace Invites”`), menu items (`“Set Variant”`, `“New Page”`), tab labels, table column headers. Small words (to, and, of, a, an, the, in, for, or) stay lowercase unless first/last: `“Upgrade to Pro”`, `“Payment in Progress”`, `“Add-On Not Available”`.
-   - **Sentence case:** anything phrased as a complete sentence or question — dialog bodies, helper/description text, tooltips that explain, placeholders (`“Enter a path…”`, `“My workspace”`), option/checkbox labels (`“Automatically hide toolbar”`), and titles that are genuine questions (`“Who can join this workspace?”`).
-   - **Prefer fragment titles.** Don’t write a sentence as a title, and never mechanically re-case one — rewrite it into a short fragment: `“You don’t have access”` → `“No Access”`, `“Payment already in progress”` → `“Payment in Progress”`, `“Still activating your plan”` → `“Activation in Progress”`.
-   - The test: is it a name or a title fragment? Title Case. Is it a full sentence or question *telling you* something? Sentence case. Flag violations in either direction in audits.
+3. **Sentence case, always.** Capitalize the first word and proper nouns only — product and plan names (`Framer`, `Pro`, `CMS`, `API`) and names the user typed (`My Portfolio`). No Title Case on any surface: not page titles (`“Account settings”`), section headings (`“Danger zone”`), buttons (`“View invoices”`, `“Try again”`), error/success/empty-state titles (`“Payment declined”`, `“No access”`, `“No projects”`), field labels (`“First name”`, `“Aspect ratio”`), menu items (`“Set variant”`), tabs, or column headers. Bodies, tooltips, placeholders, and option labels were already sentence case and stay that way.
+   - **Prefer fragment titles.** Don’t write a sentence as a title — rewrite it into a short fragment: `“You don’t have access”` → `“No access”`, `“Payment already in progress”` → `“Payment in progress”`, `“Still activating your plan”` → `“Activation in progress”`.
+   - The codebase is mid-migration and still has Title Case labels, buttons, and toast titles (`“Payment Declined”`, `“First Name”`). Legacy, like straight quotes — new copy is sentence case, and audits flag Title Case as a mechanics defect.
 
 4. **Blameless and constructive.** Never put fault on the user. State the fact, then the path out — and frame the fix as a positive instruction (what *to* do), not what went wrong.
-   - Not `“You exceeded the editor limit”` → `“Editor Limit Reached”`.
-   - Not `“Invalid code”` → `“Promotion Code Not Applied”`.
+   - Not `“You exceeded the editor limit”` → `“Editor limit reached”`.
+   - Not `“Invalid code”` → `“Promotion code not applied”`.
    - Not `“That password is too short”` → `“Choose a password with at least 8 characters”`.
 
-5. **Action-verb buttons.** Start with the verb, name the object when it isn’t obvious: `“Subscribe”`, `“Upgrade to Pro”`, `“Cancel Plan”`, `“Try Again”`. Never `“OK”`, `“Submit”`, `“Yes”`. No `-ing` forms (`“Cancel”`, not `“Cancelling”`). A button must make sense read on its own, without the title — and in a pair, never let one label mean two things (a “Cancel download?” dialog gets `“Keep downloading”` / `“Stop”`, not `“Cancel”` / `“OK”`).
+5. **Action-verb buttons.** Start with the verb, name the object when it isn’t obvious: `“Subscribe”`, `“Upgrade to Pro”`, `“Cancel plan”`, `“Try again”`. Never `“OK”`, `“Submit”`, `“Yes”`. No `-ing` forms (`“Cancel”`, not `“Cancelling”`). A button must make sense read on its own, without the title — and in a pair, never let one label mean two things (a “Cancel download?” dialog gets `“Keep downloading”` / `“Stop”`, not `“Cancel”` / `“OK”`).
 
 6. **Restrained punctuation.** Full sentences get periods; labels and buttons don’t. Exclamation marks: essentially never (lean on the checkmark, not the `!`). Oxford comma always.
 
 7. **Contractions, yes.** `“don’t”`, `“couldn’t”`, `“you’ll”`. Human register, never stiff.
 
-8. **Specific over vague.** Real names, numbers, dates: `“Expires June 30, 2026”`, `“of 5 MB”`, `“(8/100)”`. Not `“soon”`, `“large”`, `“some”`.
+8. **Specific over vague.** Real names, numbers, dates, and times: `“Expires June 30, 2026”`, `“Jan 14, 2024”`, `“28m ago”` in dense metadata, `“2 hours ago”` in a sentence, `“of 5 MB”`, `“(8/100)”`. Not `“soon”`, `“large”`, `“some”`. Follow the surface-specific date and time rules in `references/mechanics.md`.
 
 9. **Impersonal system voice — no “we,” pronouns sparingly.** The product states facts; it doesn’t speak as a company. Never “we”/“us”/“our” in errors or system messages — `“Couldn’t load content”`, not `“We’re having trouble loading this content”`. Use possessives only when needed to disambiguate: `“Favorites”` over `“Your Favorites”`, but `“Your workspace has 8 editors”` is fine because the possessive does real work. One sanctioned exception: a sincere human moment like high-stakes cancellation (`“…contact us if we can do anything…”`) — deliberate, rare, and only where a human is genuinely behind it.
 
@@ -87,26 +85,26 @@ These are always in force, in both modes. Violating one is a defect.
 
 ## The two-line toast pattern
 
-Framer’s toasts and error/success cards are usually two lines: **primary** (what happened — a Title Case fragment, per rule 3) + **secondary** (the detail or the next step, sentence case). Both lines balanced (rule 2). Examples from the product:
+Framer’s toasts and error/success cards are usually two lines: **primary** (what happened — a short sentence-case fragment, no period) + **secondary** (the detail or the next step, a full sentence). Both lines balanced (rule 2). Examples:
 
-- `“Couldn’t Load Prices”` / `“Check your connection and try again, or contact support.”`
-- `“Payment in Progress”` / `“Complete it in your other tab, or close it and try again.”`
-- `“Editor Limit Reached”` / `“Your workspace has 8 editors, more than this plan allows.”`
-- `“Couldn’t Update Plan”` / `“Try again, or contact support if this keeps happening.”`
+- `“Couldn’t load prices”` / `“Check your connection and try again, or contact support.”`
+- `“Payment in progress”` / `“Complete it in your other tab, or close it and try again.”`
+- `“Editor limit reached”` / `“Your workspace has 8 editors, more than this plan allows.”`
+- `“Couldn’t update plan”` / `“Try again, or contact support if this keeps happening.”`
 
-Older toasts still carry sentence-case primaries (`“Exceeded max file size”`) — legacy, like straight quotes; new primaries are Title Case fragments.
+Some shipped toasts still carry Title Case primaries (`“Couldn’t Load Prices”`) — legacy, like straight quotes; new primaries are sentence-case fragments.
 
-Single-line is fine for simple successes: `“Archived My Portfolio.”`, `“Copied API Key”`.
+Single-line is fine for simple successes: `“Archived My Portfolio.”`, `“Copied API key”`.
 
 ## References — load when relevant
 
 - `references/framer-voice.md` — tone profile + bank of verbatim Framer strings (marketing and in-product). Read before any Write task to calibrate.
 - `references/patterns.md` — per-category playbooks (errors, success, empty states, buttons, confirmations, tooltips, placeholders, plan/billing) with real DO/DON’T pairs. Read for the surface you’re writing.
-- `references/mechanics.md` — quotes, dashes, capitalization, the multiline-balance technique, periods, numbers, dates. Read when a typography/grammar call is in question.
+- `references/mechanics.md` — quotes, dashes, capitalization, the multiline-balance technique, periods, numbers, dates, relative time, and clock time. Read when a typography/grammar call is in question.
 - `references/ai-tells.md` — the AI-giveaway catalog for microcopy: banned constructions (negation-pivot, participial tails, triads), the dated word layer, and what makes a string read human. Skim before Write tasks; cite it when auditing.
 - `references/checklist.md` — the pass/fail rubric. Read every time in Audit mode; skim before delivering in Write mode.
-- `scripts/check-copy.sh` — deterministic mechanics check (straight quotes, `--`, `!`, banned words, emoji). Run it on drafted strings; fix every hit.
+- `scripts/check-copy.sh` — deterministic mechanics check (straight quotes, `--`, `!`, banned words, emoji) plus a warn-only Title Case heuristic. Run it on drafted strings; fix every FAIL and review every WARN.
 
 ## Before you deliver
 
-Self-check against the non-negotiables. Re-read your own copy as if it were the codebase you’re about to fail in review: curly quotes? balanced lines? casing split (Title Case for names and fragment titles — headings, buttons, labels, error/success titles; sentence case for full sentences and questions)? titles written as fragments, not re-cased sentences? blameless? verb-first buttons? If any answer is no, fix it before showing the user.
+Self-check against the non-negotiables. Re-read your own copy as if it were the codebase you’re about to fail in review: curly quotes? balanced lines? sentence case everywhere (first word and proper nouns only — no Title Case on headings, buttons, labels, or titles)? titles written as fragments? blameless? verb-first buttons? dates and times matched to the surface? If any answer is no, fix it before showing the user.

@@ -64,63 +64,42 @@ This applies to two-line toasts (primary/secondary are each one line, but a wrap
 
 ## Capitalization
 
-Two casing systems, split by one rule — **names and fragment titles get Title Case, full sentences get sentence case.** This is Apple’s HIG logic, verified against two sources:
+One casing system — **sentence case, on every surface.** Capitalize the first word and proper nouns; everything else is lowercase. There is no Title Case tier for buttons, headings, labels, or titles.
 
-- HIG Alerts: *“If the title is a complete sentence, use sentence-style capitalization and appropriate ending punctuation. If the title is a sentence fragment, use title-style capitalization, and don’t add ending punctuation.”* Hence Apple’s `“Cannot Connect to App Store”` but `“Do you want to save the changes?”`.
-- macOS HIG “Capitalization of Interface Element Labels and Text” (Table 10-2): title style for menus, buttons, and labels that aren’t full sentences (`“Total Connection Time”`); sentence style for dialog messages and option/checkbox text (`“Show displays in menu bar”`).
+### What still gets a capital
 
-It also matches the vekter codebase (`label="First Name"`, `title="Aspect Ratio"`, menu `label: "Set Variant"`, `<T>Danger Zone</T>`, `title="Payment Declined"`).
+- **First word** of the string: `“Try again”`, `“No projects”`.
+- **Product, plan, and feature names:** `Framer`, `Pro`, `Free` (as a plan name), `CMS`, `API`, `Analytics` (the add-on). `“Upgrade to Pro”`, `“Copied API key”`, `“Connect to the CMS”`, `“You are currently on a Free plan.”`
+- **Names the user typed:** project, workspace, and collection names appear exactly as entered: `“Archived My Portfolio.”`
+- **Acronyms and units:** `SEO`, `URL`, `MB`, `GB`.
 
-### Title Case — anything that names or titles something
+### Do / don’t, across surfaces
 
-| Surface | Verified codebase examples |
-|---------|---------------------------|
-| Page (h1) title | “General Workspace”, “Account Settings” |
-| Section heading | “Danger Zone”, “Passkeys”, “Member Details” |
-| Button | “View Invoices”, “Add Passkey”, “Sign Out”, “Manage Seats” |
-| Field / control label | “First Name”, “Last Name”, “Language Name” |
-| Form-group label | “Workspace Invites”, “Move Projects”, “Default Role for New Workspace Members” |
-| Property-panel row | “Aspect Ratio”, “Offset Y”, “Time Zone” |
-| Menu item | “Set Variant”, “New Page”, “Select All”, “View Analytics” |
-| Error / success / empty-state title (fragment) | “Payment Declined”, “Editor Limit Reached”, “No Access”, “Add-On Not Available”, “Updated to Pro” |
-| Tab label, table column header | “Pending Invites” |
+| Surface | Sentence case (do) | Title Case (don’t) |
+|---------|--------------------|--------------------|
+| Page (h1) title | “Account settings”, “General workspace” | “Account Settings” |
+| Section heading | “Danger zone”, “Member details” | “Danger Zone” |
+| Button | “Try again”, “View invoices”, “Update payment method” | “Try Again”, “Update Payment Method” |
+| Field / control label | “First name”, “Aspect ratio”, “Time zone” | “First Name” |
+| Form-group label | “Workspace invites”, “Default role for new workspace members” | “Workspace Invites” |
+| Menu item | “Set variant”, “New page”, “View analytics” | “Set Variant” |
+| Error / success / empty-state title | “Payment declined”, “Editor limit reached”, “No access”, “Add-on not available” | “Payment Declined”, “Add-On Not Available” |
+| Tab label, table column header | “Pending invites” | “Pending Invites” |
+| Button with a product name | “Upgrade to Pro”, “Back to plans” | “Upgrade To Pro” |
 
-Title Case rules: capitalize principal words; short prepositions, articles, and conjunctions (to, and, of, a, an, the, for, or, in) stay lowercase — `“Upgrade to Pro”`, `“Back to Plans”`, `“Payment in Progress”`, never `“Upgrade To Pro”`. Always capitalize the first and last word, even a small one (`“Activation in Progress”`).
+Bodies, secondary toast lines, tooltips, placeholders, and option/checkbox labels were already sentence case and don’t change: `“Your workspace has 8 editors, more than this plan allows.”`, `“Automatically hide toolbar”`, `“Who can join this workspace?”`
 
-| Title Case (do) | (don’t) |
-|-----------------|---------|
-| “Try Again” | “Try again” |
-| “First Name” (field label) | “First name” |
-| “Update Payment Method” | “Update payment method” |
-| “Danger Zone” (section heading) | “Danger zone” |
-| “Payment Declined” (error title) | “Payment declined” |
-| “No Access” (rewritten fragment) | “You Don’t Have Access” (re-cased sentence) |
+**Titles are fragments, not sentences.** When a title wants to be a sentence, rewrite it into a short fragment: `“You don’t have access”` → `“No access”`, `“Still activating your plan”` → `“Activation in progress”`. A fragment title takes no period; a rare full-sentence title (`“Thank you.”`) keeps its period.
 
-### Sentence case — full sentences, questions, and options
-
-| Surface | Examples |
-|---------|----------|
-| Dialog body, helper/description text | “Deleting a project will delete it for all collaborators…” |
-| Error/toast secondary line | “Your workspace has 8 editors, more than this plan allows.” |
-| Explanatory tooltip | “Additional editors are $20 / month.” |
-| Empty-state body | “Create a project from scratch or use a template to get started.” |
-| Placeholder | “Enter a path…”, “My workspace”, “First name” (as example input) |
-| Option/checkbox label | “Automatically hide toolbar” |
-| Title that is a genuine question | “Who can join this workspace?” |
-
-Note product names keep their caps inside a sentence-case string: `“Connect to the CMS”`, `“You are currently on a Free plan.”`
-
-**Titles are fragments, not sentences.** When a title wants to be a sentence, rewrite it into a short fragment instead of re-casing it: `“You don’t have access”` → `“No Access”`, `“Still activating your plan”` → `“Activation in Progress”`. Apple keeps complete-sentence titles sentence-case with punctuation — but house style is to avoid sentence titles altogether.
-
-**The tiebreak test:** is it a name, or a fragment titling a screen/card/error? Title Case. Is it a full sentence or question — describing, asking, reporting? Sentence case. A placeholder saying “First name” is sentence case (it’s example input), while the label above it is “First Name” (it names the field). In audits, flag violations in either direction; treat old sentence-case titles (`“Something went wrong”`-era screens) as legacy, like straight quotes.
+**Codebase reality.** The vekter codebase is mid-migration and still carries Title Case in many places (`label="First Name"`, `title="Aspect Ratio"`, `title="Payment Declined"`, `<T>Danger Zone</T>`). Treat these as legacy, like straight quotes: write new copy sentence case, and in audits flag Title Case as a mechanics defect. Don’t “match the neighbours” by adding new Title Case strings to a file that has them — note the broader cleanup instead.
 
 ---
 
 ## Periods
 
 - **Full sentences** get a period: `“Deleting a project will delete it for all collaborators and cannot be undone.”`
-- **Buttons, labels, headlines, short fragments** do not: `“Try Again”`, `“No Projects”`, `“Payment Declined”`.
-- **Two-line toasts:** the secondary line usually completes a sentence and takes a period: `“Editor Limit Reached”` / `“Your workspace has 8 editors, more than this plan allows.”` The primary fragment doesn’t.
+- **Buttons, labels, headlines, short fragments** do not: `“Try again”`, `“No projects”`, `“Payment declined”`.
+- **Two-line toasts:** the secondary line usually completes a sentence and takes a period: `“Editor limit reached”` / `“Your workspace has 8 editors, more than this plan allows.”` The primary fragment doesn’t.
 
 ---
 
@@ -130,7 +109,7 @@ Note product names keep their caps inside a sentence-case string: `“Connect to
 - **Oxford comma:** always. `“Edit, delete, or archive.”`
 - **Ellipsis `…`:** signals “this needs more input” on an action (`“Save as…”`, opening a dialog) or an in-progress state (`“Exporting…”`). Don’t use it for trailing-off tone.
 - **Question marks:** fine in genuine questions (“Cancel download?”), but most dialog bodies are statements, not questions.
-- **Ampersand `&`:** acceptable in tight button labels where it reads naturally: `“Confirm & Pay”`.
+- **Ampersand `&`:** acceptable in tight button labels where it reads naturally: `“Confirm & pay”`.
 
 ---
 
@@ -138,18 +117,45 @@ Note product names keep their caps inside a sentence-case string: `“Connect to
 
 Aligned with Apple’s HIG (“Writing”): the interface is an instrument, not a speaker.
 
-- **Never “we” / “us” / “our” in system messages.** It’s unclear who “we” is, and it turns a fact into an apology. `“Unable to load content”` or `“Couldn’t Load Summary”` — not `“We’re having trouble loading this content.”` This applies to all errors, toasts, tooltips, and settings copy.
+- **Never “we” / “us” / “our” in system messages.** It’s unclear who “we” is, and it turns a fact into an apology. `“Unable to load content”` or `“Couldn’t load summary”` — not `“We’re having trouble loading this content.”` This applies to all errors, toasts, tooltips, and settings copy.
 - **Possessives sparingly.** Drop “my/your” when context already establishes ownership: `“Favorites”`, not `“Your Favorites”`; `“Account”`, not `“My Account”`. Keep the possessive when it does real work — `“Your workspace has 8 editors”` distinguishes *this* workspace from the plan’s limit.
 - **Pick one perspective and hold it.** If a flow says “your site,” it doesn’t switch to “my site” elsewhere. Framer copy addresses the user as “you”; the product itself has no first person.
 - **The sanctioned exception:** a rare, sincere human moment — e.g. the high-stakes cancellation line `“Please don’t hesitate to contact us if we can do anything to keep Framer in your workflow.”` That’s a person talking, on purpose. Everything routine stays impersonal.
 
 ---
 
-## Numbers, units, dates
+## Numbers, units, dates & time
+
+### Numbers & measured units
 
 - **Numerals** for quantities and limits: `“8 editors”`, `“5 MB”`, `“(500/1000)”`. Not “eight editors.”
-- **Space before unit:** `“5 MB”`, `“105/100 GB”`.
+- **Space before measured units:** `“5 MB”`, `“105/100 GB”`. Compact relative timestamps are the exception; see below.
 - **Money:** `“$20 / month”` — spaced slash matches the codebase.
-- **Dates spelled, not numeric:** `“Expires June 30, 2026”`. Avoid `“06/30/26”` (ambiguous, less human).
 - **Counts in errors:** show current/limit so the number explains itself: `“(5/50)”`.
 - **Avoid vague quantities:** never “soon,” “a lot,” “some,” “large” when a real number is available.
+
+### Relative time
+
+Framer Studio has a deliberate compact style for dense metadata. Use the style that fits the surface; don’t mix compact and expanded forms within one list.
+
+- **Dense lists and metadata:** `“Just now”`, `“28m ago”`, `“1h ago”`, `“2d ago”`, `“1w ago”`, `“3mo ago”`, `“1y ago”`. No space before the unit, no plural `s`, and no period.
+- **Ultra-dense badges:** omit the suffix when the context already establishes recency: `“28m”`, `“1h”`.
+- **Sentences and roomy secondary copy:** spell out the unit: `“Updated 2 hours ago.”`
+- **Named relative dates:** `“Yesterday”` is allowed only when the surface uses a calendar-aware formatter. Don’t hand-author it from elapsed hours, and don’t swap it into a surface backed by a numeric formatter.
+- **Implementation reality:** existing Studio UI should prefer the shared `RelativeTime` component or `formatDistanceToNowShort`. That formatter is compact but doesn’t currently guarantee named dates or week units at every threshold; adding `“Yesterday”` or `“1w ago”` may require formatter work.
+- **Accessibility:** render timestamps with semantic `<time dateTime="…">` markup and expose the full localized date and time in a tooltip or accessible label.
+
+### Calendar dates
+
+- **New compact UI:** use `“Jan 14, 2024”` in tables, lists, and metadata.
+- **Full or high-stakes copy:** use `“January 14, 2024”`, as in `“Expires June 30, 2026”`.
+- **No ordinals in new copy:** use `“Jan 14”`, not `“Jan 14th”`. Existing billing and tooltip strings with ordinals are legacy, not patterns to copy.
+- **No ambiguous numeric dates:** avoid `“06/30/26”` and `“30/06/26”` in non-localized copy.
+- **Include the year** for historical records and any list that can span years. Omit it only when nearby context makes the year unambiguous.
+- **Localization:** use the viewer’s locale when the surface supports localization; don’t assemble localized dates from string fragments.
+
+### Clock time
+
+- **Exact time:** use `“4:30 PM”` in English UI—no leading zero, with uppercase `AM` or `PM`.
+- **Ranges:** use an en dash with no spaces: `“9:00–11:00 AM”`.
+- **Time zones:** include the zone when people in different zones could interpret the time differently. A timestamp explicitly shown in the viewer’s local time doesn’t need one.

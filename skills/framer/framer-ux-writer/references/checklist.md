@@ -8,12 +8,12 @@ A string passes only if every applicable line passes. Any fail is a defect to fi
 
 - [ ] **Curly quotes** — all apostrophes and quotes are `‘` `’` `“` `”`, never straight `'` or `"`. (Displayed text only; not code/translation keys.) Run `scripts/check-copy.sh` on drafted strings to catch these deterministically.
 - [ ] **Dashes** — em `—` / en `–` where used, never `--`. Ellipsis is `…`, not `...`.
-- [ ] **Casing split** — names and fragment titles get Title Case, full sentences get sentence case. Title Case: titles (page h1 + section headings), **error/success/empty-state titles that are fragments** (`“Payment Declined”`, `“Editor Limit Reached”`, `“No Access”`), buttons, **field/control labels**, form-group labels, menu items, property rows, tabs, column headers (`“Account Settings”`, `“Danger Zone”`, `“First Name”`, `“Set Variant”`) with small words lowercase (`“Upgrade to Pro”`, `“Payment in Progress”`). Sentence case: dialog/toast bodies, helper text, tooltips, placeholders, option labels, and any string that is a question or full sentence (`“Who can join this workspace?”`). Titles should be fragments — rewrite sentence titles (`“You don’t have access”` → `“No Access”`), don’t re-case them. Flag violations in either direction.
+- [ ] **Sentence case** — every surface: first word and proper nouns capitalized, nothing else. Applies to page and section headings (`“Account settings”`, `“Danger zone”`), buttons (`“Try again”`, `“Update payment method”`), field/control labels (`“First name”`), menu items (`“Set variant”`), tabs, column headers, and error/success/empty-state titles (`“Payment declined”`, `“Editor limit reached”`, `“No access”`). Product and plan names keep their caps (`“Upgrade to Pro”`, `“Copied API key”`). Titles should be fragments (`“You don’t have access”` → `“No access”`). Flag any Title Case as a mechanics defect (`“Payment Declined”`, `“First Name”`).
 - [ ] **Periods** — present on full sentences, absent on buttons/labels/fragments.
 - [ ] **No exclamation marks** (unless a truly exceptional, sincere case — default is none).
 - [ ] **Oxford comma** in any list of three or more.
 - [ ] **Multiline balance** — if it wraps (`\n` / pre-line), the lines are roughly equal width with no orphan word.
-- [ ] **Numbers/dates** — numerals + spaced units; dates spelled (`June 30, 2026`); concrete, not vague.
+- [ ] **Numbers, dates & time** — numerals; spaces before measured units but not compact relative timestamps (`5 MB`, `28m ago`); new dates use `Jan 14, 2024` or `January 14, 2024` without ordinals; clock times use `4:30 PM`; values are concrete, not vague. Named relative dates such as `Yesterday` require a calendar-aware formatter.
 
 ## Voice (always applies)
 
@@ -35,12 +35,13 @@ A string passes only if every applicable line passes. Any fail is a defect to fi
 - [ ] Unambiguous read in isolation — makes sense without the title, and a pair never makes one label mean two things (“Keep downloading” / “Stop,” not “Cancel” / “OK”).
 - [ ] Reflects the post-click result, not the current state.
 - [ ] Destructive buttons name the destructive act (“Delete project,” not “Confirm”).
+- [ ] Sentence case (“Cancel plan,” not “Cancel Plan”); product names keep their caps (“Upgrade to Pro”).
 
 **Error / failure toast**
-- [ ] Primary line = the fact, neutral, a Title Case fragment (`“Payment Declined”`). Secondary line = recovery or concrete detail, sentence case.
+- [ ] Primary line = the fact, neutral, a short sentence-case fragment with no period (`“Payment declined”`). Secondary line = recovery or concrete detail, a full sentence.
 - [ ] Answers the three questions: what happened, why it happened, what to do now. The “why” isn’t silently dropped.
 - [ ] Names the specific object when more than one referent is possible (“My Portfolio,” not “this project”).
-- [ ] Recovery is specific when the fix is known (“Update Payment Method”), not generic.
+- [ ] Recovery is specific when the fix is known (“Update payment method”), not generic.
 - [ ] “Couldn’t” for failed attempts; “Can’t” for not-allowed.
 
 **Success toast**
@@ -48,7 +49,7 @@ A string passes only if every applicable line passes. Any fail is a defect to fi
 - [ ] No exclamation mark; surfaces the next opportunity only if one genuinely exists.
 
 **Empty state**
-- [ ] Headline names the emptiness — Title Case fragment, no period (`“No Projects”`). Body guides forward or explains what appears here.
+- [ ] Headline names the emptiness — sentence-case fragment, no period (`“No projects”`). Body guides forward or explains what appears here.
 - [ ] At most one CTA, verb-first.
 
 **Confirmation dialog (destructive)**
@@ -75,4 +76,4 @@ Rewrite:  "<fixed version>"
 Why:      <one line>
 ```
 
-Group by severity if there are many: mechanics defects (curly quotes, casing) first, then voice/blameless issues, then surface-specific.
+Group by severity if there are many: mechanics defects (curly quotes, Title Case) first, then voice/blameless issues, then surface-specific.
